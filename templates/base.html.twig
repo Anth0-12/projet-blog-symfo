@@ -22,7 +22,7 @@
                        Mon blog
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminDashboard">
-                        <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin') }}">Tableau de bord</a></li>
                         <li><a class="dropdown-item" href="#">Menus</a></li>
                     </ul>
                 </div>
@@ -71,7 +71,7 @@
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 mb-0 align-items-center">
             <span class="copyright">
-                © {{ 'now'|date('Y') }} Antho
+                © {{ 'now'|date('Y') }} Antho. Tous droits réservés
             </span>
         </div>
 
