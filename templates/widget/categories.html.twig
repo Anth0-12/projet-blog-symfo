@@ -1,15 +1,17 @@
 <div class="p-4" >
 
-    <h4 class="fst-italic">Category</h4>
+    <h4 class="fst-italic">Catégories</h4>
 
     <ol class="list-unstyled mb-0">
     
+    {% for category in categories %}
+        
         <li>
-            <a href="#" class="text-decoration-none">Tuto Symfony</a>
+            <a href="{{ path('category_show', { slug: category.slug }) }}" class="text-decoration-none">{{ category.name }}</a>
         </li>
-        <li>
-            <a href="#" class="text-decoration-none">Tuto PHP</a>
-        </li>
+
+    {% endfor %}
+    
 
     </ol>
     
