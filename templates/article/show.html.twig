@@ -10,6 +10,16 @@
         <hr>
 
         {{ article.content|raw }}
+
+        <h2 class="comment-title nt-5">
+            <span id="coment-count">{{ article.comments|length }} commentaire(s)</span>
+        </h2>
+
+        <hr>
+
+        <div class="comment-area mb-5">
+            {{ form(commentForm) }}
+        </div>
     </div>
 
 {% endblock %}
