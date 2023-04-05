@@ -13,7 +13,13 @@ class CommentController extends AbstractController
     public function add(Request $request): Response
     {
         $commentData = $request->request->all('comment');
-        
+
+        if (!$this->isCsrfTokenvalid('comment-add', $commentData['_token'])) {
+            return $this->json([
+                'code' => 'INVALID_CSRF_TOKEN'
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         return $this->render('comment/index.html.twig', [
             'controller_name' => 'CommentController',
         ]);
