@@ -3,13 +3,13 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
- <main class="container-fluid">
+ <main class="container-fluid" style="height: 500px">
 
         <div class="row">
 
-            <div class="col-md-9">
+            <div class="col-md-10" style="height: 50px">
 
-                <h3 class="pb-4 mb-4 fst-italic border-bottom d-flex justify-content-center">Articles récents</h3>
+                <h3 class="ps-4 fst-italic d-flex align-items-center h-100">Articles récents</h3>
 
                 <div id="article-list">
                     {% include "article/list.html.twig" with { articles } %}
@@ -19,7 +19,7 @@
 
 
 
-            <div class="col-md-3 bg-primary d-flex align-items-center justify-content-center flex-column">
+            <div class="col-md-2 bg-primary d-flex align-items-center justify-content-center flex-column" style="height: 500px">
 
 
                 <div class="position-sticky text-white" style="top: 2rem">

@@ -16,8 +16,8 @@
         {% endblock %}
     </head>
 
-    <nav class="py-2 bg-primary border-bottom">
-        <div class="container d-flex flex-wrap">
+    <nav class="" style="height: 75px">
+        <div class="container-fluid d-flex flex-wrap h-100 bg-primary align-items-center">
             
                 <div class="dropdown">
                     <a class="nav nav-link dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,16 +43,16 @@
     </nav>
 
 
-<div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+<div class="container-fluid">
+    <header class="d-flex align-items-center justify-content-center border-bottom" style="height: 75px">
     
-        <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="{{ path('app_home') }}">
-            <span class="fs-4">
+        <a class="d-flex align-items-center justify-content-center mb-3 mb-md-0 col-9 text-dark text-decoration-none" href="{{ path('app_home') }}">
+            <span class="fs-4 d-flex align-items-center justify-content-center">
                 Mon blog
             </span>
         </a>
 
-        <ul class="nav nav-pills align-items-center">
+        <ul class="nav nav-pills align-items-center justify-content-center">
             <li class="nav-item">
                 <a class="nav-link text-dark" href="#">S'inscrire</a>
             </li>
