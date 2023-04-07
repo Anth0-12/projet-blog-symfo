@@ -7,9 +7,11 @@
 
         <div class="row">
 
-            <div class="col-md-10" style="height: 50px">
+            <div class="col-md-10 align-items-center justify-content-center" style="height: 50px">
 
                 <h3 class="ps-4 fst-italic d-flex align-items-center h-100">Articles récents</h3>
+
+                <div class="col-11 border-top border-dark border-opacity-50 ms-4 pt-5"></div>
 
                 <div id="article-list">
                     {% include "article/list.html.twig" with { articles } %}

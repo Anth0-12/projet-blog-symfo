@@ -12,6 +12,7 @@ class MenuCrudController extends AbstractCrudController
         return Menu::class;
     }
 
+    
     /*
     public function configureFields(string $pageName): iterable
     {

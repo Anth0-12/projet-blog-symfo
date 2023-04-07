@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Menu;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Entity\Category;
@@ -45,6 +46,13 @@ class DashboardController extends AbstractDashboardController
               MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper',  Article::class),
               MenuItem::linkToCrud('Ajouter', 'fas fa-plus',  Article::class)->setAction(Crud::PAGE_NEW),
               MenuItem::linkToCrud('Catégories', 'fas fa-list',  Category::class)
+        ]);
+
+        yield MenuItem::subMenu('Menus', 'fas fa-list')->setSubItems([
+              MenuItem::linkToCrud('Pages', 'fas fa-file',  Menu::class),
+              MenuItem::linkToCrud('Articles', 'fas fa-newspaper',  Menu::class),
+              MenuItem::linkToCrud('Liens personnalisés', 'fas fa-link',  Menu::class),
+              MenuItem::linkToCrud('Catégories', 'fab fa-delicious',  Menu::class),
         ]);
 
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment',  Comment::class);
