@@ -49,10 +49,10 @@ class DashboardController extends AbstractDashboardController
         ]);
 
         yield MenuItem::subMenu('Menus', 'fas fa-list')->setSubItems([
-              MenuItem::linkToCrud('Pages', 'fas fa-file',  Menu::class),
-              MenuItem::linkToCrud('Articles', 'fas fa-newspaper',  Menu::class),
-              MenuItem::linkToCrud('Liens personnalisés', 'fas fa-link',  Menu::class),
-              MenuItem::linkToCrud('Catégories', 'fab fa-delicious',  Menu::class),
+            MenuItem::linkToCrud('Pages', 'fas fa-file', Menu::class)->setQueryParameter('submenuIndex', 0),
+            MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Menu::class)->setQueryParameter('submenuIndex', 1),
+            MenuItem::linkToCrud('Liens personnalisés', 'fas fa-link', Menu::class)->setQueryParameter('submenuIndex', 2),
+            MenuItem::linkToCrud('Catégories', 'fab fa-delicious', Menu::class)->setQueryParameter('submenuIndex', 3),
         ]);
 
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment',  Comment::class);
