@@ -22,10 +22,22 @@ class MenuRepository extends ServiceEntityRepository
         parent::__construct($registry, Menu::class);
     }
 
+    /**
+     * @return Menu[]
+     */
+    public function findAllForTwig(): array
+    {
+      return $this->createQueryBuilder('m')
+        ->where('m.isVisible = true')
+        ->orderBy('m.menuOrder')
+        ->getQuery()
+        ->getResult();
+    }
+
   public function getIndexQueryBuilder(string $field): QueryBuilder
   {
         return $this->createQueryBuilder('m')
-            ->where("m.$field IS NOT NULL OR (m.page IS NULL AND m.article IS NULL AND m.LINK IS NULL AND m.category IS NULL)");
+            ->where("m.$field IS NOT NULL OR (m.page IS NULL AND m.article IS NULL AND m.link IS NULL AND m.category IS NULL)");
   }
 
 }

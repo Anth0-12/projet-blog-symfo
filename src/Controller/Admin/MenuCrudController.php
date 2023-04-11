@@ -8,7 +8,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use Symfony\Component\HttpFoundation\RequestStack;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -17,7 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+
 
 class MenuCrudController extends AbstractCrudController
 {
@@ -40,13 +39,6 @@ class MenuCrudController extends AbstractCrudController
     }
 
 
-    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
-    {
-        $subMenuIndex = $this->getSubMenuIndex();
-
-        return $this->menuRepo->getIndexQueryBuilder($this->getFieldNameFromSubMenuIndex($subMenuIndex));
-    }
-
     public function configureCrud(Crud $crud): Crud
     {
         $subMenuIndex = $this->getSubMenuIndex();
@@ -62,6 +54,14 @@ class MenuCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular($entityLabelInSingular)
             ->setEntityLabelInPlural($entityLabelInPlural);
+    }
+
+
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $subMenuIndex = $this->getSubMenuIndex();
+
+        return $this->menuRepo->getIndexQueryBuilder($this->getFieldNameFromSubMenuIndex($subMenuIndex));
     }
 
     

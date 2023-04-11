@@ -1,3 +1,5 @@
+{% set menus = menu_service.findAll %}
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -16,71 +18,100 @@
         {% endblock %}
     </head>
 
-    <nav class="" style="height: 75px">
-        <div class="container-fluid d-flex flex-wrap h-100 bg-primary align-items-center">
-            
-                <div class="dropdown">
-                    <a class="nav nav-link dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                       Mon blog
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminDashboard">
-                        <li><a class="dropdown-item" href="{{ path('admin') }}">Tableau de bord</a></li>
-                        <li><a class="dropdown-item" href="#">Menus</a></li>
-                    </ul>
-                </div>
-
-                <div class="dropdown">
-                    <a class="nav nav-link dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                       Ajouter
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminAdd">
-                        <li><a class="dropdown-item" href="#">Articles</a></li>
-                        <li><a class="dropdown-item" href="#">Pages</a></li>
-                    </ul>
-                </div>
-
-        </div>
-    </nav>
-
-
-<div class="">
-    <header class="container-fluid d-flex align-items-center justify-content-center" style="height: 75px">
-    
-        <a class="d-flex align-items-center justify-content-center mb-3 mb-md-0 col-9 text-dark text-decoration-none" href="{{ path('app_home') }}">
-            <span class="fs-4 d-flex align-items-center justify-content-center">
-                Mon blog
-            </span>
-        </a>
-
-        <ul class="nav nav-pills align-items-center justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="#">S'inscrire</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="#">Se connecter</a>
-            </li>
-        </ul>
-
-    </header>
-</div>
 
 
     <body class="bg-secondary bg-opacity-25" style="height: auto">
+
+        <nav class="" style="height: 75px">
+            <div class="container-fluid d-flex flex-wrap h-100 bg-primary align-items-center">
+                
+                    <div class="dropdown">
+                        <a class="nav nav-link dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Mon blog
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminDashboard">
+                            <li><a class="dropdown-item" href="{{ path('admin') }}">Tableau de bord</a></li>
+                            <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown">
+                        <a class="nav nav-link dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Ajouter
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminAdd">
+                            <li><a class="dropdown-item" href="#">Articles</a></li>
+                            <li><a class="dropdown-item" href="#">Pages</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+        </nav>
+
+
+        <div class="">
+            <header class="container-fluid d-flex align-items-center justify-content-center" style="height: 75px">
+            
+                <a class="d-flex align-items-center justify-content-center mb-3 mb-md-0 col-6 text-dark text-decoration-none" href="{{ path('app_home') }}">
+                    <span class="fs-4 d-flex align-items-center justify-content-center">
+                        Mon blog
+                    </span>
+                </a>
+
+                <ul class="nav nav-pills align-items-center justify-content-center">
+
+                {% for menu in menus %}
+                    {% if menu.subMenus.count > 0 %}
+
+                        <div class="dropdown">
+                            <a class="nav nav-link text-dark dropdown-toggle" href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ menu.name }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for subMenu in menu.subMenus %}
+                                    <li><a class="dropdown-item" href="{{ subMenu|menuLink }}"> {{ subMenu.name }} </a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{{ menu|menuLink }}">{{ menu.name }}</a>
+                        </li>
+
+                    {% endif %}
+                {% endfor %}
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">S'inscrire</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Se connecter</a>
+                    </li>
+                </ul>
+
+            </header>
+        </div>
+
+
         {% block body %}{% endblock %}
+
+
+        <div class="d-flex align-items-center flex-column border-top border-dark border-opacity-50" style="height: 100px">
+
+                <footer class="container-fluid col-12 d-flex flex-wrap justify-content-between align-items-end h-100">
+                    <div class="col-md-4 align-items-center">
+                        <span class="copyright">
+                            © {{ 'now'|date('Y') }} Antho. Tous droits réservés
+                        </span>
+                    </div>
+
+                </footer>
+                
+        </div>
+
     </body>
 
-<div class="d-flex align-items-center flex-column border-top border-dark border-opacity-50" style="height: 100px">
-
-        <footer class="container-fluid col-12 d-flex flex-wrap justify-content-between align-items-end h-100">
-            <div class="col-md-4 align-items-center">
-                <span class="copyright">
-                    © {{ 'now'|date('Y') }} Antho. Tous droits réservés
-                </span>
-            </div>
-
-        </footer>
-        
-    
-</div>
     
 </html>
