@@ -15,21 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-    #[Route('/user/{username}', name: 'app_profile')]
-
-    public function index(?User $user)
-    {
-        if (!$user) {
-            return $this->redirectToRoute('app_home');
-        } 
-
-        return $this->render('user/index.html.twig', [
-            'user' => $user
-        ]);
-    }
-
-
-    #[Route('/register', name: 'app_register')]
+    #[Route('/user/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -58,7 +44,7 @@ class UserController extends AbstractController
     }
 
 
-    #[Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/user/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
@@ -73,9 +59,23 @@ class UserController extends AbstractController
         return $this->render('user/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/user/logout', name: 'app_logout')]
     public function logout(): void
     {
         throw new LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+
+    #[Route('/user/{username}', name: 'app_profile')]
+
+    public function index(?User $user)
+    {
+        if (!$user) {
+            return $this->redirectToRoute('app_home');
+        } 
+
+        return $this->render('user/index.html.twig', [
+            'user' => $user
+        ]);
     }
 }

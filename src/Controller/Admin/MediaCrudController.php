@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Media;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class MediaCrudController extends AbstractCrudController
@@ -12,14 +15,24 @@ class MediaCrudController extends AbstractCrudController
         return Media::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        $mediaDir = $this->getParameter('medias_directory');
+        $uploadsDir = $this->getParameter('uploads_directory');
+        
+        yield TextField::new('name');
+
+        $imageField = ImageField::new('filename', 'Média')
+            ->setBasePath($uploadsDir)
+            ->setUploadDir($mediaDir)
+            ->setUploadedFileNamePattern('[slug]-[uuid].[extension]');
+
+        if (Crud::PAGE_EDIT == $pageName) {
+            $imageField->setRequired(false);
+        }
+
+        yield $imageField;
     }
-    */
+    
 }

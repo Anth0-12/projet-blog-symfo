@@ -62,4 +62,9 @@ class Media
 
         return $this;
     }
+
+    public function __toString(): string  #convertir l'objet de class ("featuredImage") en chaine de caractère
+    {
+        return $this->name;
+    }
 }
