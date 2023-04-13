@@ -60,7 +60,7 @@
 
                 <ul class="nav nav-pills align-items-center justify-content-center">
 
-                {% for menu in menus %}
+                {% for menu in menus %}                  {# on affiche les menus tuto et mon article #}
                     {% if menu.subMenus.count > 0 %}
 
                         <div class="dropdown">
@@ -83,7 +83,7 @@
                     {% endif %}
                 {% endfor %}
 
-                {% if not is_granted('IS_AUTHENTICATED_FULLY') %} //quand utilisateur connecté on cache les boutons de connexion et d'inscription
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %} {# quand utilisateur non connecté on affiche les boutons de connexion et d'inscription #}
                     
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="{{ path('app_register') }}">S'inscrire</a>
@@ -92,10 +92,21 @@
                         <a class="nav-link text-dark" href="{{ path('app_login') }}">Se connecter</a>
                     </li>
 
-                    {% else %} // on affiche le bouton de déconnexion
+                    {% else %}  {# quand utilisateur connecté on cache les boutons de connexion et d'inscription et on affiche le nom d'utilisateur #}
 
                     <div class="dropdown">
-                    
+                        <a class="nav nav-link text-dark dropdown-toggle" href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ app.user.username|capitalize }}  {# profil utilisateur avec le filtre majuscule #}
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_profile', { username: app.user.username }) }}"> Mon profil </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}"> Déconnexion </a>
+                            </li>
+                        </ul>
                     </div>
 
                 {% endif %}
