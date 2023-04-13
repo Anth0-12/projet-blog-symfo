@@ -18,7 +18,7 @@ class MediaCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
-        $mediaDir = $this->getParameter('medias_directory');
+        $mediaDir = $this->getParameter('medias_directory');  #On récupère les paramètres du fichier service.yaml
         $uploadsDir = $this->getParameter('uploads_directory');
         
         yield TextField::new('name');

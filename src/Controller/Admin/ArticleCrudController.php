@@ -18,7 +18,7 @@ class ArticleCrudController extends AbstractCrudController
     }
 
     
-    public function configureFields(string $pageName): iterable
+    public function configureFields(string $pageName): iterable   #On ajoute des champs de texte, etc...
     {
         yield TextField::new('title');
 
