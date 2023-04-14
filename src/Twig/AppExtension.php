@@ -13,11 +13,14 @@ use App\Entity\Page;
 use Doctrine\Common\Collections\Collection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Security;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+
+use function PHPUnit\Framework\returnSelf;
 
 class AppExtension extends AbstractExtension
 {
@@ -43,17 +46,22 @@ class AppExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('ea_index', [$this, 'getAdminUrl']),
+            new TwigFunction('ea_gen_url', [$this, 'getAdminUrl']),
         ];
     }
 
 
-    public function getAdminUrl(string $controller): string
+    public function getAdminUrl(string $controller, ?string $action = null): string
     {
-        return $this->adminUrlGenerator
-            ->setController(self::ADMIN_NAMESPACE . DIRECTORY_SEPARATOR . $controller)
-            ->generateUrl();
+        $adminUrlGenerator = $this->adminUrlGenerator
+            ->setController(self::ADMIN_NAMESPACE . DIRECTORY_SEPARATOR . $controller);
+            
+        if ($action) {
+            $adminUrlGenerator->setaction($action);
+        }
+        return $adminUrlGenerator->generateUrl();
     }
+
 
     public function menuLink(Menu $menu): string
     {

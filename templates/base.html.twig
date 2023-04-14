@@ -36,7 +36,7 @@
 
                             {% if is_granted('ROLE_ADMIN') %} {# on affiche les sous menu uniquement si admin #}
                                 
-                                <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li>
+                                <li><a class="dropdown-item" href="{{ ea_gen_url('MenuCrudController') }}">Menus</a></li>
 
                             {% endif %}
                         </ul>
@@ -47,8 +47,8 @@
                         Ajouter
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminAdd">
-                            <li><a class="dropdown-item" href="#">Articles</a></li>
-                            <li><a class="dropdown-item" href="#">Pages</a></li>
+                            <li><a class="dropdown-item" href="{{ ea_gen_url('ArticleCrudController', 'new') }}">Articles</a></li>
+                            <li><a class="dropdown-item" href="{{ ea_gen_url('PageCrudController', 'new') }}">Pages</a></li>
                         </ul>
                     </div>
 
@@ -130,20 +130,10 @@
         {% block body %}{% endblock %}
 
 
-        <div class="d-flex align-items-center flex-column border-top border-dark border-opacity-50" style="height: 100px">
-
-                <footer class="container-fluid col-12 d-flex flex-wrap justify-content-between align-items-end h-100">
-                    <div class="col-md-4 align-items-center">
-                        <span class="copyright">
-                            © {{ 'now'|date('Y') }} Antho. Tous droits réservés
-                        </span>
-                    </div>
-
-                </footer>
-                
-        </div>
-
+{% block footer %}
+         {% include 'partials/footer.html.twig' %}
+{% endblock %}
     </body>
-
+          
     
 </html>
