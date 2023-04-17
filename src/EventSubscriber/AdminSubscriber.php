@@ -14,7 +14,7 @@ class AdminSubscriber implements EventSubscriberInterface
     {
         return [
             BeforeEntityPersistedEvent::class => ['setEntityCreatedAt'],
-            BeforeEntityUpdatedEvent::class => ['setEntityupdatedAt']
+            BeforeEntityUpdatedEvent::class => ['setEntityUpdatedAt']
         ];
     }
     
