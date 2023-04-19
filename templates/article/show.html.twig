@@ -17,7 +17,7 @@
 
         <hr>
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %} {# on affiche les commentaires uniquement si on est connecté #}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %} {# on peut écrire un commentaire uniquement si on est connecté #}
         
         <div class="comment-area mb-5">
             {{ form(commentForm, { 'attr': { 'class': 'comment-form' } }) }}
