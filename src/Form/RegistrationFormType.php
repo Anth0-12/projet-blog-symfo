@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -22,7 +23,7 @@ class RegistrationFormType extends AbstractType
             ->add('username', TextType::class, [
                 'label' => "Nom d'utilisateur"
             ])
-            ->add('plainPassword', RepeatedType::class, [
+            ->add('plainPassword', RepeatedType::class, [ // Pour ajouter un champs de confirmation de mdp
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -33,10 +34,17 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'message' => 'Veuillez entrer un mot de passe',
                     ]),
-                    new Length([
-                        'min' => 6,
-                        'max' => 4096,
-                    ]),
+                    // new Length([
+                    //     'min' => 6,
+                    //     'max' => 4096,
+                    // ]),
+                    new Regex([
+                        'pattern' => '/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,20})/',
+                        'match' => true,
+                        'message' => 'Votre mot de passe doit contenir au moins un chiffre,
+                une minuscule, une majuscule, un caracère spéciale et
+                doit faire au moins 8 caractères de long'
+                    ])
                 ],
             ])
         ;
